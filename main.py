@@ -1,31 +1,32 @@
 print("Task date: 13.11.2023")
-print("Task: 1")
+print("Task: 2")
 
 """
-Створіть клас Device, який містить інформацію про пристрій.
+Створіть клас Ship, який містить інформацію про кораблі.
 За допомогою механізму успадкування реалізуйте клас
-Coffee Machine (містить інформацію про кавомашину), клас
-Blender (містить інформацію про блендер), клас MeatGrinder
-(містить інформацію про м’ясорубку).
-Кожен із класів має містити необхідні для роботи методи.
+Frigate (містить інформацію про фрегат), клас Destroyer(містить
+інформацію про есмінця), клас Cruiser (містить інформацію
+про крейсер).
+Кожен із класів має містити необхідні для роботи методи
 """
 
-class Device:
-    def __init__(self, brand, model):
-        self.brand = brand
-        self.model = model
+class Ship:
+    def __init__(self, name, displacement, length):
+        self.name = name
+        self.displacement = displacement
+        self.length = length
 
-class CoffeeMachine(Device):
-    def __init__(self, brand, model, coffee_type):
-        super().__init__(brand, model)
-        self.coffee_type = coffee_type
+class Frigate(Ship):
+    def __init__(self, name, displacement, length, num_missiles):
+        super().__init__(name, displacement, length)
+        self.num_missiles = num_missiles
 
-class Blender(Device):
-    def __init__(self, brand, model, speed):
-        super().__init__(brand, model)
-        self.speed = speed
+class Destroyer(Ship):
+    def __init__(self, name, displacement, length, num_cannons):
+        super().__init__(name, displacement, length)
+        self.num_cannons = num_cannons
 
-class MeatGrinder(Device):
-    def __init__(self, brand, model, capacity):
-        super().__init__(brand, model)
-        self.capacity = capacity
+class Cruiser(Ship):
+    def __init__(self, name, displacement, length, num_aircraft):
+        super().__init__(name, displacement, length)
+        self.num_aircraft = num_aircraft
