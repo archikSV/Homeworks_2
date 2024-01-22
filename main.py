@@ -1,32 +1,25 @@
 print("Task date: 13.12.2023")
-print("Task: 1")
+print("Task: 2")
 
 """
-Створіть два окремих "мікросервіси" (дві окремі
-програми). Одна програма створює та експортує дані у
-форматі JSON, а інша програма завантажує та обробляє ці
-дані. Це може бути, наприклад, система, яка створює та
-обробляє замовлення.
+Створіть програму для проведення опитування або
+анкетування. Зберігайте відповіді користувачів у форматі
+JSON файлу. Кожне опитування може бути окремим
+об'єктом у файлі JSON, а відповіді кожного користувача -
+списком значень.
 """
 
-# Service 1: Export data in JSON format
 import json
 
-data = {
-    "order_id": 12345,
-    "product": "Smartphone",
-    "quantity": 2
-}
+# Get responses from the user
+responses = []
 
-with open('data.json', 'w') as file:
-    json.dump(data, file)
+while True:
+    response = input("Please enter your response (or 'q' to quit): ")
+    if response == 'q':
+        break
+    responses.append(response)
 
-
-# Service 2: Load and process the data
-import json
-
-with open('data.json', 'r') as file:
-    data = json.load(file)
-    print("Order ID:", data['order_id'])
-    print("Product:", data['product'])
-    print("Quantity:", data['quantity'])
+# Save responses to a JSON file
+with open('survey_responses.json', 'w') as file:
+    json.dump(responses, file)
