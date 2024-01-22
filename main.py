@@ -2,39 +2,55 @@ print("Task date: 20.11.2023")
 print("Task: 2")
 
 """
-Створіть клас температурного датчика, де обмежується
-температура в межах прийнятних для датчика значень, за
-допомогою property().
+ Завдання для функторів. Створіть клас TextModifier,
+який може здійснювати різні операції над текстом:
+• Операція перетворення тексту у верхній регістр.
+• Операція перетворення тексту у нижній регістр.
+• Операція видалення пробілів у тексті.
+• Операція шифрування тексту за допомогою зсуву
+вліво на задану кількість символів.
 """
 
-class TemperatureSensor:
-    def __init__(self, temperature):
-        self._temperature = temperature
+class TextModifier:
+    def __init__(self, text):
+        self.text = text
 
-    def get_temperature(self):
-        return self._temperature
+    def to_upper(self):
+        self.text = self.text.upper()
 
-    def set_temperature(self, new_temperature):
-        if -50 <= new_temperature <= 50:  # Example acceptable temperature range
-            self._temperature = new_temperature
-        else:
-            print("Error: Temperature out of acceptable range")
+    def to_lower(self):
+        self.text = self.text.lower()
 
-    temperature = property(get_temperature, set_temperature)
+    def remove_spaces(self):
+        self.text = self.text.replace(' ', '')
+
+    def encrypt(self, shift):
+        encrypted_text = ''
+        for char in self.text:
+            if char.isalpha():
+                shifted_char_code = ord(char) + shift
+                if char.islower():
+                    if shifted_char_code > ord('z'):
+                        shifted_char_code -= 26
+                elif char.isupper():
+                    if shifted_char_code > ord('Z'):
+                        shifted_char_code -= 26
+                encrypted_text += chr(shifted_char_code)
+            else:
+                encrypted_text += char
+        self.text = encrypted_text
 
 
 
-# Create a TemperatureSensor instance with an initial temperature of 25
-sensor = TemperatureSensor(25)
+modifier = TextModifier("Hello, World!")
+modifier.to_upper()
+print(modifier.text)  # Output: "HELLO, WORLD!"
 
-# Get the current temperature
-print(sensor.temperature)
+modifier.to_lower()
+print(modifier.text)  # Output: "hello, world!"
 
-# Try to set a temperature outside the acceptable range
-sensor.temperature = 60
+modifier.remove_spaces()
+print(modifier.text)  # Output: "hello,world!"
 
-# Set a temperature within the acceptable range
-sensor.temperature = 10
-
-# Get the updated temperature
-print(sensor.temperature)
+modifier.encrypt(3)
+print(modifier.text)  # Output: "khoor,zruog!"
