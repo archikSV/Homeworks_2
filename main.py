@@ -1,34 +1,28 @@
 print("Task date: 29.11.2023")
-print("Task: 2")
+print("Task: 3")
 
 """
-Змініть стек із першого завдання таким чином, щоб його
-розмір був нефіксованим.
+Дано три вежі та n дисків різного розміру, відсортованих
+за зростанням, розміщених на першій вежі у вигляді піраміди.
+Потрібно перемістити всі диски на третю вежу,
+використовуючи проміжну вежу, за умови, що можна
+переміщати тільки один диск за раз та диск завжди можна
+покласти лише на диск більшого розміру або на порожню
+вежу.
+Ця задача може бути вирішена за допомогою
+рекурсивного алгоритму, використовуючи стек для
+зберігання проміжних ходів при переміщенні дисків між
+вежами.
 """
 
-class Stack:
-    def __init__(self):
-        self.stack = []
+def hanoi(n, source, target, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+        return
+    hanoi(n-1, source, auxiliary, target)
+    print(f"Move disk {n} from {source} to {target}")
+    hanoi(n-1, auxiliary, target, source)
 
-    def push(self, item):
-        self.stack.append(item)
-
-    def pop(self):
-        if len(self.stack) == 0:
-            print("Stack is empty")
-            return None
-        else:
-            return self.stack.pop()
-
-    def count(self):
-        return len(self.stack)
-
-    def is_empty(self):
-        return len(self.stack) == 0
-
-    def peek(self):
-        if len(self.stack) == 0:
-            print("Stack is empty")
-            return None
-        else:
-            return self.stack[-1]
+# Example usage
+n = 3
+hanoi(n, 'A', 'C', 'B')
