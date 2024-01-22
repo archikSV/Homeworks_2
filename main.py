@@ -1,32 +1,33 @@
 print("Task date: 13.11.2023")
-print("Task: 2")
+print("Task: 3")
 
 """
-Створіть клас Ship, який містить інформацію про кораблі.
-За допомогою механізму успадкування реалізуйте клас
-Frigate (містить інформацію про фрегат), клас Destroyer(містить
-інформацію про есмінця), клас Cruiser (містить інформацію
-про крейсер).
-Кожен із класів має містити необхідні для роботи методи
+Запрограмуйте клас Money (об’єкт класу оперує однією
+валютою) для роботи з грошима.
+У класі мають бути передбачені: поле для зберігання цілої
+частини грошей (долари, євро, гривні тощо) і поле для зберігання копійок (центи, євроценти, копійки тощо).
+Реалізуйте методи виведення суми на екран, задання
+значень частин.
+Створіть клас Product для роботи з продуктом або товаром беручи за основу клас Money. Реалізуйте метод для
+зменшення ціни на задане число.
+Для кожного з класів реалізуйте необхідні методи та поля.
 """
 
-class Ship:
-    def __init__(self, name, displacement, length):
-        self.name = name
-        self.displacement = displacement
-        self.length = length
+class Money:
+    def __init__(self, currency, amount, cents):
+        self.currency = currency
+        self.amount = amount
+        self.cents = cents
 
-class Frigate(Ship):
-    def __init__(self, name, displacement, length, num_missiles):
-        super().__init__(name, displacement, length)
-        self.num_missiles = num_missiles
+    def display_amount(self):
+        print(f"{self.amount} {self.currency} and {self.cents} cents")
 
-class Destroyer(Ship):
-    def __init__(self, name, displacement, length, num_cannons):
-        super().__init__(name, displacement, length)
-        self.num_cannons = num_cannons
+    def set_amount(self, amount, cents):
+        self.amount = amount
+        self.cents = cents
 
-class Cruiser(Ship):
-    def __init__(self, name, displacement, length, num_aircraft):
-        super().__init__(name, displacement, length)
-        self.num_aircraft = num_aircraft
+class Product(Money):
+    def reduce_price(self, amount):
+        self.amount -= amount
+        if self.amount < 0:
+            print("Price cannot be negative")
