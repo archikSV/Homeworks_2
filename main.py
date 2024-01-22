@@ -1,28 +1,28 @@
 print("Task date: 11.12.2023")
-print("Task: 1")
+print("Task: 2")
 
 """
-Маємо певний словник з назвами країн і столиць. Назва
-країни використовується як ключ, назва столиці — як значення. Реалізуйте: додавання, видалення, пошук, редагування,
-збереження та завантаження даних (використовуючи стиснення та розпакування).
+Маємо певний словник з назвами музичних груп (виконавців) та альбомів. Назва групи використовується як ключ,
+назва альбомів — як значення. Реалізуйте: додавання, видалення, пошук, редагування, збереження та завантаження
+даних (використовуючи стиснення та розпакування).
 """
 
-class CountryCapitals:
+class MusicLibrary:
     def __init__(self):
         self.data = {}
 
-    def add_country_capital(self, country, capital):
-        self.data[country] = capital
+    def add_group_album(self, group, album):
+        self.data[group] = album
 
-    def remove_country_capital(self, country):
-        del self.data[country]
+    def remove_group_album(self, group):
+        del self.data[group]
 
-    def search_capital_by_country(self, country):
-        return self.data.get(country)
+    def search_album_by_group(self, group):
+        return self.data.get(group)
 
-    def edit_country_capital(self, country, new_capital):
-        if country in self.data:
-            self.data[country] = new_capital
+    def edit_group_album(self, group, new_album):
+        if group in self.data:
+            self.data[group] = new_album
 
     def save_data(self, file_name):
         import json
@@ -47,29 +47,30 @@ class CountryCapitals:
                 decompressed_file.writelines(compressed_file)
 
 
-# Create an instance of the CountryCapitals class
-cc = CountryCapitals()
 
-# Add country-capital pairs
-cc.add_country_capital('USA', 'Washington D.C.')
-cc.add_country_capital('Canada', 'Ottawa')
-cc.add_country_capital('France', 'Paris')
+# Create an instance of the MusicLibrary class
+ml = MusicLibrary()
 
-# Search for a capital
-print(cc.search_capital_by_country('USA'))  # Output: Washington D.C.
+# Add music group-album pairs
+ml.add_group_album('The Beatles', 'Abbey Road')
+ml.add_group_album('Led Zeppelin', 'IV')
+ml.add_group_album('Pink Floyd', 'The Dark Side of the Moon')
 
-# Edit a country's capital
-cc.edit_country_capital('USA', 'New York')
-print(cc.search_capital_by_country('USA'))  # Output: New York
+# Search for an album
+print(ml.search_album_by_group('The Beatles'))  # Output: Abbey Road
+
+# Edit a group's album
+ml.edit_group_album('The Beatles', 'Sgt. Pepper\'s Lonely Hearts Club Band')
+print(ml.search_album_by_group('The Beatles'))  # Output: Sgt. Pepper's Lonely Hearts Club Band
 
 # Save data to a file
-cc.save_data('country_capitals.json')
+ml.save_data('music_library.json')
 
 # Load data from the file
-cc.load_data('country_capitals.json')
+ml.load_data('music_library.json')
 
 # Compress data
-cc.compress_data('country_capitals.json', 'country_capitals.json.gz')
+ml.compress_data('music_library.json', 'music_library.json.gz')
 
 # Decompress data
-cc.decompress_data('country_capitals.json.gz', 'decompressed_country_capitals.json')
+ml.decompress_data('music_library.json.gz', 'decompressed_music_library.json')
