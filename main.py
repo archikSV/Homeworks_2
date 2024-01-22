@@ -1,25 +1,39 @@
 print("Task date: 13.12.2023")
-print("Task: 2")
+print("Task: 3")
 
 """
-Створіть програму для проведення опитування або
-анкетування. Зберігайте відповіді користувачів у форматі
-JSON файлу. Кожне опитування може бути окремим
-об'єктом у файлі JSON, а відповіді кожного користувача -
-списком значень.
+До вже реалізованого класу «Стадіон» додайте можливість
+стиснення та розпакування даних з використанням json та
+pickle.
 """
 
 import json
+import pickle
 
-# Get responses from the user
-responses = []
+class Stadium:
+    def __init__(self, name, capacity, location):
+        self.name = name
+        self.capacity = capacity
+        self.location = location
 
-while True:
-    response = input("Please enter your response (or 'q' to quit): ")
-    if response == 'q':
-        break
-    responses.append(response)
+    def compress_json(self, filename):
+        with open(filename, 'w') as file:
+            json.dump({'name': self.name, 'capacity': self.capacity, 'location': self.location}, file)
 
-# Save responses to a JSON file
-with open('survey_responses.json', 'w') as file:
-    json.dump(responses, file)
+    def decompress_json(self, filename):
+        with open(filename, 'r') as file:
+            data = json.load(file)
+            self.name = data['name']
+            self.capacity = data['capacity']
+            self.location = data['location']
+
+    def compress_pickle(self, filename):
+        with open(filename, 'wb') as file:
+            pickle.dump({'name': self.name, 'capacity': self.capacity, 'location': self.location}, file)
+
+    def decompress_pickle(self, filename):
+        with open(filename, 'rb') as file:
+            data = pickle.load(file)
+            self.name = data['name']
+            self.capacity = data['capacity']
+            self.location = data['location']
