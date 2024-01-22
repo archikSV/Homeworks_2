@@ -1,43 +1,40 @@
 print("Task date: 20.11.2023")
-print("Task: 1")
+print("Task: 2")
 
 """
-Іноді ви можете використати property() для створення
-доступу до атрибутів через геттери та сеттери для
-забезпечення певних перевірок або операцій перед
-отриманням або зміною атрибутів. Створіть клас для
-роботи з банківським рахунком, щоб гроші знялися або
-зарахувалися тільки при виконанні певних умов
-(наприклад, якщо гроші на рахунку є).
+Створіть клас температурного датчика, де обмежується
+температура в межах прийнятних для датчика значень, за
+допомогою property().
 """
 
-class BankAccount:
-    def __init__(self, balance):
-        self._balance = balance
+class TemperatureSensor:
+    def __init__(self, temperature):
+        self._temperature = temperature
 
-    def get_balance(self):
-        return self._balance
+    def get_temperature(self):
+        return self._temperature
 
-    def set_balance(self, new_balance):
-        if new_balance >= 0:
-            self._balance = new_balance
+    def set_temperature(self, new_temperature):
+        if -50 <= new_temperature <= 50:  # Example acceptable temperature range
+            self._temperature = new_temperature
         else:
-            print("Error: Cannot set negative balance")
+            print("Error: Temperature out of acceptable range")
 
-    balance = property(get_balance, set_balance)
+    temperature = property(get_temperature, set_temperature)
 
 
-# Create a BankAccount instance with an initial balance of 100
-account = BankAccount(100)
 
-# Get the current balance
-print(account.balance)
+# Create a TemperatureSensor instance with an initial temperature of 25
+sensor = TemperatureSensor(25)
 
-# Try to set a negative balance
-account.balance = -50
+# Get the current temperature
+print(sensor.temperature)
 
-# Set a positive balance
-account.balance = 150
+# Try to set a temperature outside the acceptable range
+sensor.temperature = 60
 
-# Get the updated balance
-print(account.balance)
+# Set a temperature within the acceptable range
+sensor.temperature = 10
+
+# Get the updated temperature
+print(sensor.temperature)
