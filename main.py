@@ -1,11 +1,12 @@
 print("Task date: 22.11.2023")
-print("Task: 2")
+print("Task: 3")
 
 """
-Метаклас, що може змінювати ім'я класу залежно
-від певних умов або параметрів.
+Створіть метаклас, який автоматично додає певні
+атрибути до всіх класів, що використовують його
 """
 
-class DynamicClassName(type):
+class AutoAttributeAdder(type):
     def __new__(cls, name, bases, dct):
-       return super().__new__(cls, name, bases, dct)
+        dct['added_attribute'] = 'This attribute was added automatically'
+        return super().__new__(cls, name, bases, dct)
